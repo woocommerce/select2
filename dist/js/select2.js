@@ -5674,11 +5674,11 @@ S2.define('jquery.select2',[
   './select2/core',
   './select2/defaults'
 ], function ($, _, Select2, Defaults) {
-  if ($.fn.select2 == null) {
+  if ($.fn.selectWoo == null) {
     // All methods that should return the element
     var thisMethods = ['open', 'close', 'destroy'];
 
-    $.fn.select2 = function (options) {
+    $.fn.selectWoo = function (options) {
       options = options || {};
 
       if (typeof options === 'object') {
@@ -5718,9 +5718,16 @@ S2.define('jquery.select2',[
     };
   }
 
-  if ($.fn.select2.defaults == null) {
-    $.fn.select2.defaults = Defaults;
+  if ($.fn.select2 != null && $.fn.select2.defaults != null) {
+    $.fn.selectWoo.defaults = $.fn.select2.defaults;
   }
+
+  if ($.fn.selectWoo.defaults == null) {
+    $.fn.selectWoo.defaults = Defaults;
+  }
+
+  // Also register selectWoo under select2 if select2 is not already present.
+  $.fn.select2 = $.fn.select2 || $.fn.selectWoo;
 
   return Select2;
 });
