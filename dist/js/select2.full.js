@@ -791,7 +791,7 @@ S2.define('select2/results',[
 
   Results.prototype.render = function () {
     var $results = $(
-      '<ul class="select2-results__options" role="listbox"></ul>'
+      '<ul class="select2-results__options" role="listbox" aria-live="assertive"></ul>'
     );
 
     if (this.options.get('multiple')) {
@@ -3932,7 +3932,7 @@ S2.define('select2/dropdown/search',[
       '<span class="select2-search select2-search--dropdown">' +
         '<input class="select2-search__field" type="text" tabindex="-1"' +
         ' autocomplete="off" autocorrect="off" autocapitalize="off"' +
-        ' spellcheck="false" role="combobox" arial-autocomplete="list" />' +
+        ' spellcheck="false" role="combobox" aria-autocomplete="list" />' +
       '</span>'
     );
 
