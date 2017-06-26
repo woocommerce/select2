@@ -1,9 +1,9 @@
 /*!
- * Select2 <%= package.version %>
- * https://select2.github.io
+ * SelectWoo <%= package.version %>
+ * https://github.com/woocommerce/selectWoo
  *
  * Released under the MIT license
- * https://github.com/select2/select2/blob/master/LICENSE.md
+ * https://github.com/woocommerce/selectWoo/blob/master/LICENSE.md
  */
 (function (factory) {
   if (typeof define === 'function' && define.amd) {

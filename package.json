@@ -12,13 +12,13 @@
       "url": "https://github.com/ivaynberg"
     },
     {
-      "name": "Alex Weissman",
-      "url": "https://github.com/alexweissman"
+      "name": "Automattic",
+      "url": "https://github.com/woocommerce/selectWoo"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/select2/select2.git"
+    "url": "git://github.com/woocommerce/selectWoo"
   },
   "bugs": {
     "url": "https://github.com/select2/select2/issues"
@@ -38,7 +38,7 @@
     "src",
     "dist"
   ],
-  "version": "4.0.5",
+  "version": "5.0.0",
   "jspm": {
     "main": "js/select2",
     "directories": {
