@@ -1,9 +1,9 @@
 /*!
- * Select2 4.0.3
- * https://select2.github.io
+ * SelectWoo 5.0.0
+ * https://github.com/woocommerce/selectWoo
  *
  * Released under the MIT license
- * https://github.com/select2/select2/blob/master/LICENSE.md
+ * https://github.com/woocommerce/selectWoo/blob/master/LICENSE.md
  */
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
@@ -5776,6 +5776,7 @@ S2.define('jquery.select2',[
   // This allows Select2 to use the internal loader outside of this file, such
   // as in the language files.
   jQuery.fn.select2.amd = S2;
+  jQuery.fn.selectWoo.amd = S2;
 
   // Return the Select2 instance for anyone who is importing it.
   return select2;
