@@ -1688,7 +1688,7 @@ S2.define('select2/selection/multiple',[
     if (data.length === 0) {
       return;
     }
-console.log(data);
+
     // Sort selected elements alphabetically by text.
     data.sort(function(a, b){
       atext = a.text.toLowerCase();
