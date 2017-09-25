@@ -9,6 +9,7 @@
 - Updates to Slovak (#4915)
 - Fixed Norwegian `inputTooShort` message (#4896)
 - Add Bosnian translation (`bs`) (#4504)
+- Improve French translation (#4988)
 
 ## 4.0.4
 - Fix issue with entire form losing focus when tabbing away from a Select2 control (#4419)
