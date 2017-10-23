@@ -167,6 +167,7 @@ module.exports = function (grunt) {
           testTimeout: 8000,
           testname: 'QUnit test for Select2',
           browsers: [
+            /*
             {
               browserName: 'internet explorer',
               version: '8',
@@ -182,7 +183,7 @@ module.exports = function (grunt) {
               version: '10',
               platform: 'Windows 7'
             },
-
+            */
             {
               browserName: 'internet explorer',
               version: '11',
