@@ -167,7 +167,6 @@ module.exports = function (grunt) {
           testTimeout: 8000,
           testname: 'QUnit test for Select2',
           browsers: [
-            /*
             {
               browserName: 'internet explorer',
               version: '8',
@@ -183,7 +182,7 @@ module.exports = function (grunt) {
               version: '10',
               platform: 'Windows 7'
             },
-            */
+
             {
               browserName: 'internet explorer',
               version: '11',
@@ -442,10 +441,13 @@ module.exports = function (grunt) {
   ciTasks.push('compile')
   ciTasks.push('connect:tests');
 
+  /*
+  // grunt-saucelabs appears to be broken with Travis altogether now.
   // Can't run Sauce Labs tests in pull requests
   if (process.env.TRAVIS_PULL_REQUEST == 'false') {
     ciTasks.push('saucelabs-qunit');
   }
+  */
 
   ciTasks.push('qunit');
   ciTasks.push('jshint');
