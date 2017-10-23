@@ -164,7 +164,7 @@ module.exports = function (grunt) {
           build: testBuildNumber,
           tags: ['tests', 'qunit'],
           urls: testUrls,
-          statusCheckAttempts: 180,
+          testTimeout: 8000,
           testname: 'QUnit test for Select2',
           browsers: [
             {
