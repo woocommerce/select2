@@ -6,6 +6,7 @@
 - Replace `autocapitalize=off` with `autocapitalize=none` (#4994)
 
 ### Translations
+- Vietnamese: remove an unnecessary quote mark (#5059)
 - Czech: Add missing commas and periods (#5052)
 - Spanish: Update the 'errorLoading' message (#5032)
 - Fix typo in Romanian (#5005)
