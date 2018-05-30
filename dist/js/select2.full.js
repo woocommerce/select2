@@ -4047,7 +4047,7 @@ S2.define('select2/dropdown/search',[
     });
 
     container.on('focus', function () {
-      if (container.isOpen()) {
+      if (!container.isOpen()) {
         self.$search.focus();
       }
     });
