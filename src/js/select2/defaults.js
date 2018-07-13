@@ -366,33 +366,34 @@ define([
       minimumResultsForSearch: 0,
       selectOnClose: false,
       sorter: function (data, term) {
-      	// Split the data into 3 slices:
-		    // - Items alphabetically before the items matching in the beginning
-		    // - Items matching in the beginning with term
-		    // - Items alphabetically after the items matching in the beginning
+        // Split the data into 3 slices:
+        // - Items alphabetically before the items matching in the beginning
+        // - Items matching in the beginning with term
+        // - Items alphabetically after the items matching in the beginning
 
-		    // Find the two borders between those slices.
-      	var firstBeginsWithTerm = -1;
-      	var lastBeginsWithTerm = -1;
-      	var dataLength = data.length;
-      	for ( var i = 0; i < dataLength; i++ ) {
-      		if ( data[i].text.toLocaleLowerCase().indexOf( term ) === 0 ) {
-      			if ( firstBeginsWithTerm === -1 ) {
-					    firstBeginsWithTerm = i;
-				    }
-				    if ( lastBeginsWithTerm < i ) {
-      				lastBeginsWithTerm = i;
-				    }
-			    }
-		    }
+        // Find the two borders between those slices.
+        var firstBeginsWithTerm = -1;
+        var lastBeginsWithTerm = -1;
+        var dataLength = data.length;
+        var lcTerm = term.toLocaleLowerCase();
+        for ( var i = 0; i < dataLength; i++ ) {
+          if ( data[i].text.toLocaleLowerCase().indexOf( lcTerm ) === 0 ) {
+            if ( firstBeginsWithTerm === -1 ) {
+              firstBeginsWithTerm = i;
+            }
+            if ( lastBeginsWithTerm < i ) {
+              lastBeginsWithTerm = i;
+            }
+          }
+        }
 
-		    // Take the first slice and put it after the 2nd slice.
-		    if ( firstBeginsWithTerm > -1 && lastBeginsWithTerm > -1 ) {
-			    var sliceOne = data.slice(0, firstBeginsWithTerm);
-			    var sliceTwo = data.slice(firstBeginsWithTerm, lastBeginsWithTerm + 1);
-			    var sliceThree = data.slice(lastBeginsWithTerm + 1);
-			    return sliceTwo.concat( sliceOne.concat(sliceThree) );
-	  	  }
+        // Take the first slice and put it after the 2nd slice.
+        if ( firstBeginsWithTerm > -1 && lastBeginsWithTerm > -1 ) {
+          var sliceOne = data.slice(0, firstBeginsWithTerm);
+          var sliceTwo = data.slice(firstBeginsWithTerm, lastBeginsWithTerm + 1);
+          var sliceThree = data.slice(lastBeginsWithTerm + 1);
+          return sliceTwo.concat( sliceOne.concat(sliceThree) );
+        }
         
         // In case there are no matches in the beginning of the string, use default order.
         return data;
