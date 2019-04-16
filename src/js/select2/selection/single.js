@@ -104,7 +104,7 @@ define([
     var $rendered = this.$selection.find('.select2-selection__rendered');
     var formatted = this.display(selection, $rendered);
 
-    $rendered.empty().append(formatted);
+    $rendered.empty().text(formatted);
     $rendered.prop('title', selection.title || selection.text);
   };
 
