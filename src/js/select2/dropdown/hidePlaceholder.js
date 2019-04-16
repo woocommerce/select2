@@ -7,10 +7,10 @@ define([
     decorated.call(this, $element, options, dataAdapter);
   }
 
-  HidePlaceholder.prototype.append = function (decorated, data) {
+  HidePlaceholder.prototype.append = function (decorated, data, query) {
     data.results = this.removePlaceholder(data.results);
 
-    decorated.call(this, data);
+    decorated.call(this, data, query);
   };
 
   HidePlaceholder.prototype.normalizePlaceholder = function (_, placeholder) {

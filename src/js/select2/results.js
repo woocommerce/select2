@@ -58,7 +58,7 @@ define([
     this.$results.find('.select2-results__message').remove();
   };
 
-  Results.prototype.append = function (data) {
+  Results.prototype.append = function (data, query) {
     this.hideLoading();
 
     var $options = [];
@@ -73,7 +73,7 @@ define([
       return;
     }
 
-    data.results = this.sort(data.results);
+    data.results = this.sort(data.results, query ? query.term : '');
 
     for (var d = 0; d < data.results.length; d++) {
       var item = data.results[d];
@@ -91,10 +91,10 @@ define([
     $resultsContainer.append($results);
   };
 
-  Results.prototype.sort = function (data) {
+  Results.prototype.sort = function (data, term) {
     var sorter = this.options.get('sorter');
 
-    return sorter(data);
+    return sorter(data, term);
   };
 
   Results.prototype.highlightFirstItem = function () {
@@ -251,7 +251,7 @@ define([
 
     container.on('results:all', function (params) {
       self.clear();
-      self.append(params.data);
+      self.append(params.data, params.query);
 
       if (container.isOpen()) {
         self.setClasses();
@@ -260,7 +260,7 @@ define([
     });
 
     container.on('results:append', function (params) {
-      self.append(params.data);
+      self.append(params.data, params.query);
 
       if (container.isOpen()) {
         self.setClasses();

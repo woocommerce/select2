@@ -843,7 +843,7 @@ S2.define('select2/results',[
     this.$results.find('.select2-results__message').remove();
   };
 
-  Results.prototype.append = function (data) {
+  Results.prototype.append = function (data, query) {
     this.hideLoading();
 
     var $options = [];
@@ -858,7 +858,7 @@ S2.define('select2/results',[
       return;
     }
 
-    data.results = this.sort(data.results);
+    data.results = this.sort(data.results, query ? query.term : '');
 
     for (var d = 0; d < data.results.length; d++) {
       var item = data.results[d];
@@ -876,10 +876,10 @@ S2.define('select2/results',[
     $resultsContainer.append($results);
   };
 
-  Results.prototype.sort = function (data) {
+  Results.prototype.sort = function (data, term) {
     var sorter = this.options.get('sorter');
 
-    return sorter(data);
+    return sorter(data, term);
   };
 
   Results.prototype.highlightFirstItem = function () {
@@ -1036,7 +1036,7 @@ S2.define('select2/results',[
 
     container.on('results:all', function (params) {
       self.clear();
-      self.append(params.data);
+      self.append(params.data, params.query);
 
       if (container.isOpen()) {
         self.setClasses();
@@ -1045,7 +1045,7 @@ S2.define('select2/results',[
     });
 
     container.on('results:append', function (params) {
-      self.append(params.data);
+      self.append(params.data, params.query);
 
       if (container.isOpen()) {
         self.setClasses();
@@ -4097,10 +4097,10 @@ S2.define('select2/dropdown/hidePlaceholder',[
     decorated.call(this, $element, options, dataAdapter);
   }
 
-  HidePlaceholder.prototype.append = function (decorated, data) {
+  HidePlaceholder.prototype.append = function (decorated, data, query) {
     data.results = this.removePlaceholder(data.results);
 
-    decorated.call(this, data);
+    decorated.call(this, data, query);
   };
 
   HidePlaceholder.prototype.normalizePlaceholder = function (_, placeholder) {
@@ -4983,7 +4983,37 @@ S2.define('select2/defaults',[
       maximumSelectionLength: 0,
       minimumResultsForSearch: 0,
       selectOnClose: false,
-      sorter: function (data) {
+      sorter: function (data, term) {
+        // Split the data into 3 slices:
+        // - Items alphabetically before the items matching in the beginning
+        // - Items matching in the beginning with term
+        // - Items alphabetically after the items matching in the beginning
+
+        // Find the two borders between those slices.
+        var firstBeginsWithTerm = -1;
+        var lastBeginsWithTerm = -1;
+        var dataLength = data.length;
+        var lcTerm = term.toLocaleLowerCase();
+        for ( var i = 0; i < dataLength; i++ ) {
+          if ( data[i].text.toLocaleLowerCase().indexOf( lcTerm ) === 0 ) {
+            if ( firstBeginsWithTerm === -1 ) {
+              firstBeginsWithTerm = i;
+            }
+            if ( lastBeginsWithTerm < i ) {
+              lastBeginsWithTerm = i;
+            }
+          }
+        }
+
+        // Take the first slice and put it after the 2nd slice.
+        if ( firstBeginsWithTerm > -1 && lastBeginsWithTerm > -1 ) {
+          var sliceOne = data.slice(0, firstBeginsWithTerm);
+          var sliceTwo = data.slice(firstBeginsWithTerm, lastBeginsWithTerm + 1);
+          var sliceThree = data.slice(lastBeginsWithTerm + 1);
+          return sliceTwo.concat( sliceOne.concat(sliceThree) );
+        }
+        
+        // In case there are no matches in the beginning of the string, use default order.
         return data;
       },
       templateResult: function (result) {
