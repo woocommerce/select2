@@ -102,9 +102,9 @@ define([
     var selection = data[0];
 
     var $rendered = this.$selection.find('.select2-selection__rendered');
-    var formatted = this.display(selection, $rendered);
+    var formatted = Utils.entityDecode(this.display(selection, $rendered));
 
-    $rendered.empty().append(formatted);
+    $rendered.empty().text(formatted);
     $rendered.prop('title', selection.title || selection.text);
   };
 

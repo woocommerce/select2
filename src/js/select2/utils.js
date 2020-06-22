@@ -255,6 +255,12 @@ define([
     });
   };
 
+  Utils.entityDecode = function (html) {
+    var txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
   // Append an array of jQuery nodes to a given element.
   Utils.appendMany = function ($element, $nodes) {
     // jQuery 1.7.x does not support $.fn.append() with an array
