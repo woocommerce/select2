@@ -1,5 +1,5 @@
 /*!
- * SelectWoo 1.0.9
+ * SelectWoo 1.0.8
  * https://github.com/woocommerce/selectWoo
  *
  * Released under the MIT license
@@ -1551,14 +1551,7 @@ S2.define('select2/selection/single',[
       .attr('id', id)
       .attr('role', 'textbox')
       .attr('aria-readonly', 'true');
-
-    var label = this.options.get( 'label' );
-
-    if ( typeof( label ) === 'string' ) {
-      this.$selection.attr( 'aria-label', label );
-    } else {
-      this.$selection.attr( 'aria-labelledby', id );
-    }
+    this.$selection.attr('aria-labelledby', id);
 
     // This makes single non-search selects work in screen readers. If it causes problems elsewhere, remove.
     this.$selection.attr('role', 'combobox');
