@@ -36,7 +36,14 @@ define([
       .attr('id', id)
       .attr('role', 'textbox')
       .attr('aria-readonly', 'true');
-    this.$selection.attr('aria-labelledby', id);
+
+    var label = this.options.get( 'label' );
+
+    if ( typeof( label ) === 'string' ) {
+      this.$selection.attr( 'aria-label', label );
+    } else {
+      this.$selection.attr( 'aria-labelledby', id );
+    }
 
     // This makes single non-search selects work in screen readers. If it causes problems elsewhere, remove.
     this.$selection.attr('role', 'combobox');
